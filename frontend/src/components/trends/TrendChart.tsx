@@ -9,25 +9,12 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
-
-interface Insight {
-  trend_direction: 'rising' | 'falling' | 'stable';
-  volatility: number;
-  predicted_category?: string;
-}
-
-interface TrendDataPoint {
-  values: number[];
-}
-
-interface TrendData {
-  [keyword: string]: TrendDataPoint;
-}
+import { type TrendResults, type MLInsights } from '../../types';
 
 interface ChartProps {
-  data: TrendData;
+  data: TrendResults;
   keywords: string[];
-  insights?: Record<string, Insight>;
+  insights: MLInsights;
 }
 
 const TrendChart: React.FC<ChartProps> = ({ data, keywords, insights = {} }) => {
@@ -93,7 +80,11 @@ const TrendChart: React.FC<ChartProps> = ({ data, keywords, insights = {} }) => 
                 </div>
                 <div className="flex justify-between">
                   <span>Volatility:</span>
-                  <span>{(insight.volatility * 100).toFixed(1)}%</span>
+                  <span>
+                    {typeof insight.volatility === 'number'
+                      ? `${(insight.volatility * 100).toFixed(1)}%`
+                      : 'N/A'}
+                  </span>
                 </div>
                 {insight.predicted_category && (
                   <div className="flex justify-between">

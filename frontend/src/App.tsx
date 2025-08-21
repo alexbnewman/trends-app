@@ -1,18 +1,18 @@
 // src/App.js
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './contexts/AuthContext';
-import Header from './components/common/Header';
-import Home from './pages/Home';
-import Dashboard from './pages/Dashboard';
-import Search from './pages/Search';
-import Watchlists from './pages/Watchlists';
-import Analysis from './pages/Analysis';
-import MLModels from './pages/MLModels';
+//import { AuthProvider } from './contexts/AuthContext.tsx';
+import Header from './components/common/Header.tsx';
+import Home from './pages/Home.tsx';
+import Dashboard from './pages/Dashboard.tsx';
+import Search from './pages/Search.tsx';
+import Watchlists from './pages/Watchlists.tsx';
+import Analysis from './pages/Analysis.tsx';
+import MLModels from './pages/MLModels.tsx';
 import './App.css';
 
 function App() {
   return (
-    <AuthProvider>
+    //<AuthProvider>
       <Router>
         <div className="min-h-screen bg-gray-50">
           <Header />
@@ -28,7 +28,7 @@ function App() {
           </main>
         </div>
       </Router>
-    </AuthProvider>
+   // </AuthProvider>
   );
 }
 

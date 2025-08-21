@@ -1,13 +1,19 @@
 // src/pages/Dashboard.js
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useTrends } from '../hooks/useTrends';
 import ApiService from '../services/api';
-import DashboardStats from '../components/dashboard/DashboardStats';
-import QuickAnalysis from '../components/dashboard/QuickAnalysis';
-import RecentActivity from '../components/dashboard/RecentActivity';
+import DashboardStats from '../components/dashboard/DashboardStats.tsx';
+import QuickAnalysis from '../components/dashboard/QuickAnalysis.tsx';
+import RecentActivity from '../components/dashboard/RecentActivity.tsx';
+
+type DashboardData = {
+  counts: any; // Replace 'any' with a more specific type if available
+  ml_status: any; // Replace 'any' with a more specific type if available
+  recent_analyses: any; // Replace 'any' with a more specific type if available
+};
 
 const Dashboard = () => {
-  const [dashboardData, setDashboardData] = useState(null);
+  const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const { searchTrends } = useTrends();
 
@@ -28,7 +34,7 @@ const Dashboard = () => {
     fetchDashboardData();
   }, []);
 
-  const handleQuickAnalysis = async (keywords) => {
+  const handleQuickAnalysis = async (keywords: string) => {
     try {
       const results = await searchTrends(keywords.split(','));
       // Navigate to analysis results or update state

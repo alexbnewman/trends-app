@@ -3,27 +3,7 @@ import React, { useState, type FormEvent } from 'react';
 import { useTrends } from '../hooks/useTrends';
 import TrendChart from '../components/trends/TrendChart';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-
-interface Analytics {
-  avg_interest?: number;
-  max_interest?: number;
-  trend_direction: 'rising' | 'falling' | 'stable';
-  volatility?: number;
-  predicted_category?: string;
-}
-
-interface TrendDataPoint {
-  values: number[];
-  analytics?: Analytics;
-}
-
-interface TrendResults {
-  [keyword: string]: TrendDataPoint;
-}
-
-interface MLInsights {
-  [keyword: string]: Analytics;
-}
+import { type TrendResults, type MLInsights, type Analytics } from '../types';
 
 const Search: React.FC = () => {
   const [query, setQuery] = useState<string>('');
@@ -46,14 +26,15 @@ const Search: React.FC = () => {
 
       setResults(trendData);
 
-      // Extract ML insights and ensure trend_direction is always defined
+      // Extract ML insights and ensure trend_direction and volatility are always defined
       const insights: MLInsights = {};
       Object.entries(trendData).forEach(([keyword, data]) => {
         if (data.analytics) {
           insights[keyword] = {
             ...data.analytics,
             trend_direction: data.analytics.trend_direction ?? 'stable',
-          };
+            volatility: typeof data.analytics.volatility === 'number' ? data.analytics.volatility : 0,
+          } as Analytics;
         }
       });
       setMlInsights(insights);

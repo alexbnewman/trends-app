@@ -1,6 +1,6 @@
-import axios, { type AxiosInstance, type AxiosRequestConfig } from 'axios';
+import axios, { type AxiosInstance } from 'axios';
 
-const API_BASE_URL: string = process.env.REACT_APP_API_URL || 'http://localhost:5000/api/v1';
+const API_BASE_URL: string = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/v1';
 
 interface TrendOptions {
   timeframe?: string;
@@ -24,7 +24,7 @@ class ApiService {
     });
 
     // Add auth interceptor
-    this.client.interceptors.request.use((config: AxiosRequestConfig) => {
+    this.client.interceptors.request.use((config) => {
       const token = localStorage.getItem('authToken');
       if (token && config.headers) {
         config.headers.Authorization = `Bearer ${token}`;
