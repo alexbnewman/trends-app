@@ -6,7 +6,7 @@ import Home from './pages/Home.tsx';
 import Dashboard from './pages/Dashboard.tsx';
 import Search from './pages/Search.tsx';
 import Watchlists from './pages/Watchlists.tsx';
-import Analysis from './pages/Analysis.tsx';
+import AnalysisPage from './pages/AnalysisPage.tsx';
 import MLModels from './pages/MLModels.tsx';
 import './App.css';
 
@@ -22,7 +22,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/search" element={<Search />} />
               <Route path="/watchlists" element={<Watchlists />} />
-              <Route path="/analysis" element={<Analysis />} />
+              <Route path="/analysis" element={<AnalysisPage />} />
               <Route path="/ml-models" element={<MLModels />} />
             </Routes>
           </main>

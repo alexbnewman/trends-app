@@ -1,4 +1,5 @@
 import axios, { type AxiosInstance } from 'axios';
+import { type WatchlistFormData } from '../types';
 
 const API_BASE_URL: string = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/v1';
 
@@ -61,6 +62,21 @@ class ApiService {
 
   async analyzeWatchlist(watchlistId: number | string): Promise<any> {
     const response = await this.client.post(`/watchlists/${watchlistId}/analyze`);
+    return response.data;
+  }
+
+  async createWatchlist(data: WatchlistFormData): Promise<any> {
+    const response = await this.client.post('/watchlists', data);
+    return response.data;
+  }
+
+  async updateWatchlist(id: number, data: WatchlistFormData): Promise<any> {
+    const response = await this.client.put(`/watchlists/${id}`, data);
+    return response.data;
+  }
+
+  async deleteWatchlist(id: number): Promise<any> {
+    const response = await this.client.delete(`/watchlists/${id}`);
     return response.data;
   }
 
